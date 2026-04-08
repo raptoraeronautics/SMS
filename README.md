@@ -340,7 +340,7 @@
                 labels: radarLabelsRaw.map(l => wrapLabel(l)),
                 datasets: [
                     {
-                        label: 'Crewed Aviation Standard (Part 135)',
+                        label: 'Crewed Aviation Standard',
                         data: [100, 100, 100, 100, 100],
                         backgroundColor: 'rgba(13, 148, 136, 0.1)',
                         borderColor: '#0d9488',
@@ -479,7 +479,7 @@
                 goal: "Establish a factual baseline to prevent building safety systems on inaccurate assumptions regarding current compliance levels."
             },
             "2": {
-                title: "Phase 2: Part 135 Gap Analysis",
+                title: "Phase 2: Safety Gap Analysis",
                 desc: "We cross-reference the findings from Phase 1 against established crewed aviation standards (Part 135/107 waivers). We identify exactly where the procedural gaps lie and score the associated liability risks.",
                 list: ["Aviation standard benchmark report", "Liability risk scoring", "Regulatory vulnerability assessment"],
                 goal: "Provide executive leadership with a clear, quantified understanding of where the program falls short of defendable aviation standards."
