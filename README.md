@@ -160,7 +160,7 @@
             <div class="interactive-card p-6">
                 <div class="flex justify-center gap-4 mb-8">
                     <button class="scenario-btn px-4 py-2 rounded-full text-sm font-medium border transition-colors bg-teal-600 text-white border-teal-600" data-scenario="moderate">Moderate Scaling (Base Model)</button>
-                    <button class="scenario-btn px-4 py-2 rounded-full text-sm font-medium border border-stone-300 text-stone-600 hover:bg-stone-100 transition-colors" data-scenario="aggressive">Aggressive Automation Scaling</button>
+                    <button class="scenario-btn px-4 py-2 rounded-full text-sm font-medium border border-stone-300 text-stone-600 hover:bg-teal-600 transition-colors" data-scenario="aggressive">Aggressive Automation Scaling</button>
                 </div>
 
                 <div class="chart-container relative" style="height: 450px;">
