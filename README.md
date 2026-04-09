@@ -173,7 +173,7 @@
         <section id="panel-solution" class="tab-content">
             <div class="mb-10 text-center">
                 <h2 class="text-2xl font-bold text-stone-800 mb-3">The Readiness Check Solution Framework</h2>
-                <p class="text-stone-600 leading-relaxed max-w-3xl mx-auto">To mitigate these compounding risks and close the aviation gap, we deploy a structured, four-phase engagement. This transforms a drone program from a reactive tool into a proactive, aviation-grade operation. Click each phase to reveal the underlying methodology.</p>
+                <p class="text-stone-600 leading-relaxed max-w-3xl mx-auto">To mitigate these compounding risks and close the aviation safety gap, we deploy a structured, four-phase engagement. This transforms a drone program from a reactive tool into a proactive, aviation-grade operation. Click each phase to reveal the underlying methodology.</p>
             </div>
 
             <div class="flex flex-col md:flex-row gap-4 mb-8 justify-center">
@@ -480,13 +480,13 @@
             },
             "2": {
                 title: "Phase 2: Safety Gap Analysis",
-                desc: "We cross-reference the findings from Phase 1 against established crewed aviation standards (Part 135/107 waivers). We identify exactly where the procedural gaps lie and score the associated liability risks.",
+                desc: "We cross-reference the findings from Phase 1 against established crewed aviation standards. We identify exactly where the procedural gaps lie and score the associated liability risks.",
                 list: ["Aviation standard benchmark report", "Liability risk scoring", "Regulatory vulnerability assessment"],
                 goal: "Provide executive leadership with a clear, quantified understanding of where the program falls short of defendable aviation standards."
             },
             "3": {
                 title: "Phase 3: SMS Architecture & Integration",
-                desc: "We don't just point out flaws; we build the solution. We construct a formal Safety Management System (SMS) scaled specifically for uncrewed operations, including digital reporting tools and updated SOPs.",
+                desc: "We don't just point out flaws; we build you the solution. We construct a formal Safety Management System (SMS) scaled specifically for uncrewed operations, including digital reporting tools and updated SOPs.",
                 list: ["Customized SMS Manual generation", "Digital risk assessment tool deployment", "Non-punitive reporting system setup"],
                 goal: "Embed a systemic safety culture into daily operations that satisfies regulators, insurers, and internal risk managers."
             },
