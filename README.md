@@ -108,7 +108,7 @@
                 <div class="interactive-card p-8 bg-stone-100 h-full flex flex-col justify-center transition-all duration-300" id="cause-detail-panel">
                     <div class="text-teal-600 text-4xl mb-4" id="cause-icon">🔍</div>
                     <h3 class="text-xl font-bold text-stone-800 mb-3" id="cause-title">Select a category</h3>
-                    <p class="text-stone-600 leading-relaxed" id="cause-desc">Click on a segment in the doughnut chart to the left to explore the deep-dive qualitative analysis regarding why these specific failures occur in enterprise operations lacking aviation-grade safety management.</p>
+                    <p class="text-stone-600 leading-relaxed" id="cause-desc">Click on a segment in the doughnut chart to the left to explore the deep dive qualitative analysis regarding why these specific failures occur in enterprise operations lacking aviation-grade safety management.</p>
                     <div class="mt-6 p-4 bg-white border-l-4 border-teal-500 rounded text-sm text-stone-700 hidden" id="cause-stat-box">
                         <span class="font-bold block mb-1">Key Insight:</span>
                         <span id="cause-insight"></span>
@@ -141,7 +141,7 @@
                     </div>
                     <div class="lg:col-span-2 space-y-4">
                         <h4 class="font-bold text-stone-800 border-b border-stone-200 pb-2">Analysis Context</h4>
-                        <p class="text-sm text-stone-600" id="radar-context">The "Average" enterprise program scores reasonably well in basic flight SOPs but demonstrates a critical, systemic failure in establishing proactive Incident Root Cause Analysis loops and preventative maintenance tracking, relying instead on break-fix methodologies.</p>
+                        <p class="text-sm text-stone-600" id="radar-context">The "Average" enterprise program scores reasonably well in basic flight SOPs but demonstrates a critical, systemic failure in establishing proactive Incident Root Cause Analysis loops and preventative maintenance tracking, relying instead on break:fix methodologies.</p>
                         <div class="bg-amber-50 border border-amber-200 rounded p-4 mt-6">
                             <h5 class="text-amber-800 font-bold text-sm mb-1 flex items-center gap-2"><span class="text-lg">⚠️</span> Critical Vulnerability Identified</h5>
                             <p class="text-xs text-amber-700 leading-relaxed" id="radar-warning">A gap larger than 40 points in 'Risk Assessment' severely limits BVLOS (Beyond Visual Line of Sight) waiver approvals from the FAA.</p>
@@ -175,8 +175,8 @@
 
         <section id="panel-solution" class="tab-content">
             <div class="mb-10 text-center">
-                <h2 class="text-2xl font-bold text-stone-800 mb-3">The Readiness Check Solution Framework</h2>
-                <p class="text-stone-600 leading-relaxed max-w-3xl mx-auto">To mitigate these compounding risks and close the aviation safety gap, we deploy a structured, four-phase engagement. This transforms a drone program from a reactive tool into a proactive, aviation-grade operation. Click each phase to reveal the underlying methodology.</p>
+                <h2 class="text-2xl font-bold text-stone-800 mb-3">The Program Readiness Framework</h2>
+                <p class="text-stone-600 leading-relaxed max-w-3xl mx-auto">To mitigate these compounding risks and close the aviation safety gap, we deploy a structured, four phase engagement. This transforms a drone program from a reactive tool into a proactive, aviation-grade operation. Click each phase to reveal the underlying methodology.</p>
             </div>
 
             <div class="flex flex-col md:flex-row gap-4 mb-8 justify-center">
@@ -274,17 +274,17 @@
         });
 
         const causeDataDetails = {
-            0: { title: "Procedural Compliance", icon: "📑", desc: "Failures occurring when pilots deviate from established Standard Operating Procedures (SOPs). Often symptomatic of overly complex, unreadable, or outdated manual sets that don't reflect field reality.", insight: "Simplifying SOPs and instituting universal pre-flight checklists reduced these errors by 40% in post-audit programs." },
-            1: { title: "Inadequate Training", icon: "👨‍✈️", desc: "Accidents caused by pilots lacking specific training for complex scenarios (e.g., effects of strong magnetic interference, highly-automated flight modes, system failsafes). Part 107 certification does not equate to mission readiness.", insight: "Programs lacking scenario based training experience 3x higher hardware attrition rates." },
+            0: { title: "Procedural Compliance", icon: "📑", desc: "Failures occurring when pilots deviate from established Standard Operating Procedures (SOPs). Often symptomatic of overly complex, unreadable, or outdated manual sets that don't reflect field reality.", insight: "Simplifying SOPs and instituting universal preflight checklists reduced these errors by 40% in post-audit programs." },
+            1: { title: "Inadequate Training", icon: "👨‍✈️", desc: "Accidents caused by pilots lacking specific training for complex scenarios (e.g., strong magnetic interference, automated flight modes, autonomous system failsafes). Part 107 certification does not equate to mission readiness.", insight: "Programs lacking scenario based training experience 3x higher hardware attrition rates." },
             2: { title: "Hardware/Software", icon: "⚙️", desc: "System failures, firmware glitches, or component degradation. While heavily scrutinized, they represent a minority of total failures compared to human factors.", insight: "Implementing proactive maintenance schedules catches 85% of hardware issues before flight." },
-            3: { title: "Environmental Factors", icon: "🌩️", desc: "Loss of assets due to unpredicted micro-weather events, sudden wind shear, or bird strikes. Often exacerbated by poor pre-flight weather risk assessment.", insight: "Applying the impact of environmental factors on aircraft performance (performance optimization) mitigates severe environmental losses." }
+            3: { title: "Environmental Factors", icon: "🌩️", desc: "Loss of assets due to unpredicted micro weather events, sudden wind shear, or bird strikes. Often exacerbated by poor preflight weather risk assessment.", insight: "Applying the impact of environmental factors on aircraft performance (performance optimization) mitigates severe environmental losses." }
         };
 
         const causeCtx = document.getElementById('causeChart').getContext('2d');
         const causeChart = new Chart(causeCtx, {
             type: 'doughnut',
             data: {
-                labels: ['Procedural Non-Compliance', 'Inadequate Pilot Training', 'Hardware/Software Failure', 'Unmitigated Environmental Factors'].map(l => wrapLabel(l)),
+                labels: ['Procedural Non Compliance', 'Inadequate Pilot Training', 'Hardware/Software Failure', 'Unmitigated Environmental Factors'].map(l => wrapLabel(l)),
                 datasets: [{
                     data: [42, 31, 18, 9],
                     backgroundColor: ['#1c1917', '#0d9488', '#d97706', '#d6d3d1'],
@@ -320,12 +320,12 @@
         const maturityProfiles = {
             average: {
                 data: [50, 70, 45, 25, 60],
-                context: "The 'Average' enterprise program scores reasonably well in basic flight SOPs but demonstrates a critical, systemic failure in establishing proactive Incident Root Cause Analysis loops and preventative maintenance tracking, relying instead on break-fix methodologies.",
+                context: "The 'Average' enterprise program scores reasonably well in basic flight SOPs but demonstrates a critical, systemic failure in establishing proactive Incident Root Cause Analysis loops and preventative maintenance tracking, relying instead on break:fix methodologies.",
                 warning: "A gap larger than 40 points in 'Risk Assessment' severely limits BVLOS (Beyond Visual Line of Sight) waiver approvals from the FAA."
             },
             novice: {
                 data: [20, 40, 20, 10, 30],
-                context: "Novice programs heavily rely on hardware capability rather than operational procedure. Training is usually limited to vendor-provided basics, and documentation is almost entirely reactive or non-existent.",
+                context: "Novice programs heavily rely on hardware capability rather than operational procedure. Training is usually limited to vendor provided basics, and documentation is almost entirely reactive or non existent.",
                 warning: "Operating at this maturity level poses severe liability risks. Insurance providers are beginning to aggressively audit programs in this state prior to payout."
             },
             advanced: {
@@ -336,7 +336,7 @@
         };
 
         const radarCtx = document.getElementById('radarChart').getContext('2d');
-        const radarLabelsRaw = ["Preventative Maintenance", "Pilot Currency", "Pre-flight Risk Assessment", "Root Cause Analysis", "Standard Operating Procedures"];
+        const radarLabelsRaw = ["Preventative Maintenance", "Pilot Currency", "Preflight Risk Assessment", "Root Cause Analysis", "Standard Operating Procedures"];
         const radarChart = new Chart(radarCtx, {
             type: 'radar',
             data: {
@@ -490,7 +490,7 @@
             "3": {
                 title: "Phase 3: SMS Architecture & Integration",
                 desc: "We don't just point out flaws; we build you the solution. We construct a formal Safety Management System (SMS) scaled specifically for uncrewed operations, including digital reporting tools and updated SOPs.",
-                list: ["Customized SMS Manual generation", "Digital risk assessment tool deployment", "Non-punitive reporting system setup"],
+                list: ["Customized SMS Manual generation", "Digital risk assessment tool deployment", "Non punitive reporting system setup"],
                 goal: "Embed a systemic safety culture into daily operations that satisfies regulators, insurers, and internal risk managers."
             },
             "4": {
