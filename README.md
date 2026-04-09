@@ -55,7 +55,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <div class="flex items-center gap-2 font-bold text-xl text-stone-800 tracking-tight">
-                    <span class="text-teal-600 text-2xl">⛑️</span> UAS Safety <span class="font-light text-stone-400">Interactive</span>
+                    <span class="text-teal-600 text-2xl">⛑️</span> UAS Programs <span class="font-light text-stone-400">Interactive</span>
                 </div>
                 <div class="hidden md:flex space-x-8">
                     <button class="nav-btn active px-1 pt-1 text-sm font-medium text-stone-500 hover:text-teal-600 transition-colors" data-target="panel-overview">Overview & Context</button>
