@@ -88,9 +88,9 @@
     <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
 
         <section id="panel-overview" class="tab-content active">
-            <div class="mb-10">
+            <div class="mb-10 text-center">
                 <h2 class="text-2xl font-bold text-stone-800 mb-3">The Root of Program Failures</h2>
-                <p class="text-stone-600 leading-relaxed max-w-3xl">This section identifies vulnerabilities faced by enterprise drone fleets over the past 36 months. Understanding the root causes of failure is the first step toward operational resilience. Interact with the chart to view specific contextual insights regarding each category of program failure.</p>
+                <p class="text-stone-600 leading-relaxed max-w-3xl">This section identifies vulnerabilities faced by enterprise drone fleets over the past 36 months. Understanding the root causes of failure is the first step toward operational resilience. Interact with the chart to view key insights regarding each category of program failure.</p>
             </div>
             
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
@@ -115,7 +115,7 @@
         </section>
 
         <section id="panel-gaps" class="tab-content">
-            <div class="mb-10">
+            <div class="mb-10 text-center">
                 <h2 class="text-2xl font-bold text-stone-800 mb-3">Interactive Benchmarking: The Aviation Standard Gap</h2>
                 <p class="text-stone-600 leading-relaxed max-w-3xl">Traditional aviation relies on stringent protocols (Part 135/121). Drone programs often operate on ad-hoc rules. This section visualizes the disparity. Use the selector below to model different levels of enterprise drone program maturity against the gold standard of crewed aviation safety practices.</p>
             </div>
@@ -149,7 +149,7 @@
         </section>
 
         <section id="panel-forecast" class="tab-content">
-            <div class="mb-10">
+            <div class="mb-10 text-center">
                 <h2 class="text-2xl font-bold text-stone-800 mb-3">Risk Escalation Forecaster</h2>
                 <p class="text-stone-600 leading-relaxed max-w-3xl">As flight hours scale exponentially, risk does not scale linearly if foundational safety systems are weak; it compounds. This interactive forecaster demonstrates the projected unmitigated safety incidents relative to flight volume. Toggle between growth scenarios to see the impact of operational scaling without SMS intervention.</p>
             </div>
@@ -165,7 +165,7 @@
                 </div>
                 
                 <div class="mt-8 text-center max-w-2xl mx-auto">
-                    <p class="text-sm text-stone-500 font-italic">Without a "positive safety culture" embedded into the operational foundation, safety incidents and unmitigated risks grow at a disproportionate rate to flight volume.</p>
+                    <p class="text-sm text-stone-500 font-italics">Without a "positive safety culture" embedded into the operational foundation, safety incidents and unmitigated risks grow at a disproportionate rate to flight volume.</p>
                 </div>
             </div>
         </section>
