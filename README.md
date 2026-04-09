@@ -210,7 +210,7 @@
             </div>
             
             <div class="mt-16 text-center">
-                <button class="bg-stone-900 text-white font-bold py-4 px-10 rounded-full hover:bg-teal-700 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1 duration-200">
+                <button class="bg-teal-900 text-white font-bold py-4 px-10 rounded-full hover:bg-amber-700 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1 duration-200">
                     Initiate Your Program Readiness Check
                 </button>
             </div>
