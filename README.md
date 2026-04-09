@@ -168,7 +168,7 @@
                 </div>
                 
                 <div class="mt-8 text-center max-w-2xl mx-auto">
-                    <p class="text-sm text-stone-500 font-italics">Without a "positive safety culture" embedded into the operational foundation, safety incidents and unmitigated risks grow at a disproportionate rate to flight volume.</p>
+                    <p class="text-sm text-stone-500 font-italics">Without a <span class="font-sembibold">positive safety culture</span> embedded into the operational foundation, safety incidents and unmitigated risks grow at a disproportionate rate to flight volume.</p>
                 </div>
             </div>
         </section>
