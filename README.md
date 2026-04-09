@@ -71,7 +71,7 @@
         <div class="max-w-4xl mx-auto text-center">
             <h1 class="text-3xl md:text-5xl font-bold mb-4 tracking-tight leading-tight">Bridging the Gap Between <span class="text-teal-400">Drone Operations</span> and <span class="text-amber-400">Aviation Safety</span></h1>
             <p class="text-lg text-stone-300 mb-8 leading-relaxed">Explore the critical vulnerabilities in scaling enterprise drone programs, and interact with the metrics driving the need for formal Safety Management Systems (SMS).</p>
-            <button class="bg-stone-900 text-white font-bold py-4 px-10 rounded-full hover:bg-teal-700 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1 duration-200">
+            <button class="bg-teal-900 text-white font-bold py-4 px-10 rounded-full hover:bg-amber-700 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1 duration-200">
                     Initiate Your Program Readiness Check
                 </button>
             <div class="inline-flex items-center justify-center space-x-8 border-t border-stone-700 pt-8 mt-4 w-full">
