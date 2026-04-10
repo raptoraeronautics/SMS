@@ -220,7 +220,7 @@
 
     <footer class="bg-stone-100 border-t border-stone-200 py-8 text-center text-stone-500 text-sm mt-auto">
         <div class="max-w-7xl mx-auto px-6">
-            <p>&copy; 2026 Raptor Aeronautics Analytics. Data visualizations are dynamic representations of aggregated enterprise drone program audits.</p>
+            <p>&copy; 2026 Raptor Aeronautics Analytics. Data visualizations represent modeled benchmarks derived from publicly available UAS industry research, FAA incident records, and crewed aviation safety standards. They are illustrative, not empirical..</p>
         </div>
     </footer>
 
