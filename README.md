@@ -713,7 +713,7 @@
             },
             "4": {
                 title: "Phase 4: Continuous Metrics Monitoring",
-                desc: "An SMS is only as good as its adherence. Phase 4 establishes automated tracking for pilot currency, predictive maintenance schedules, and incident trend analysis to ensure long-term compliance.",
+                desc: "An SMS is only as good as its adherence. Phase 4 establishes automated tracking for pilot currency, predictive maintenance schedules, and incident trend analysis to ensure long term compliance.",
                 list: ["Dashboard creation for executive oversight", "Automated currency alert implementation", "Quarterly SMS effectiveness reviews"],
                 goal: "Transition the program from reactive hazard management to proactive, data driven operational excellence."
             }
