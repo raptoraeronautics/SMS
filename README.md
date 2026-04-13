@@ -371,14 +371,11 @@
                 },
                 scales: {
                     r: {
-                        min: 0, 
-                        max: 100,
                         angleLines: { color: 'rgba(0,0,0,0.05)' },
                         grid: { color: 'rgba(0,0,0,0.05)' },
                         pointLabels: { font: { family: 'Inter', size: 12, weight: '500' }, color: '#1c1917' },
-                        ticks: { 
-                            display: false,
-                            stepSize: 20
+                        ticks: { display: false, min: 0, max: 100, stepSize: 20}
+                            
                     }
                 }
             }
