@@ -241,7 +241,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <div class="flex items-center gap-3 font-bold text-xl tracking-tight" style="color: var(--white);">
-                    <img src="RAPTOR_LOGO_v4.jpg" alt="Raptor Aeronautics" class="h-10 w-10 object-contain rounded-sm">
+                    <img src="RAPTOR_LOGO.v4.jpg" alt="Raptor Aeronautics" class="h-10 w-10 object-contain rounded-sm">
                     UAS Programs <span style="color: var(--titanium); font-weight: 300;">Interactive</span>
                 </div>
                 <div class="hidden md:flex space-x-8">
