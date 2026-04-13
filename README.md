@@ -432,7 +432,7 @@
  
     <footer class="py-8 text-center text-sm mt-auto" style="color: var(--titanium);">
         <div class="max-w-7xl mx-auto px-6">
-            <p>&copy; 2026 Raptor Aeronautics LLC | Data visualizations reflect modeled industry trends, derived from publicly available FAA incident data, HFACS research on unmanned systems and IS-BAO Stage 3 operating standards.</p>
+            <p>&copy; 2026 Raptor Aeronautics LLC | Data visualizations reflect modeled industry trends, derived from publicly available FAA incident data, HFACS research on unmanned systems, IS-BAO and WYVERN operating standards.</p>
         </div>
     </footer>
  
