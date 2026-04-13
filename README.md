@@ -242,7 +242,7 @@
             <div class="flex justify-between h-16">
                 <div class="flex items-center gap-3 font-bold text-xl tracking-tight" style="color: var(--white);">
                     <img src="RAPTOR LOGO.v4.jpg" alt="Raptor Aeronautics" class="h-12 w-12 object-contain rounded-sm">
-                    Program Analytics <span style="color: var(--titanium); font-weight: 300;">Interactive</span>
+                    Program Metrics <span style="color: var(--titanium); font-weight: 300;">Interactive</span>
                 </div>
                 <div class="hidden md:flex space-x-8">
                     <button class="nav-btn active px-1 pt-1 text-sm font-medium transition-colors" style="color: var(--titanium);" data-target="panel-overview">Overview & Context</button>
