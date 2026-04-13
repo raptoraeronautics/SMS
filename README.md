@@ -364,7 +364,7 @@
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: false,
+                maintainAspectRatio: true,
                 plugins: {
                     tooltip: commonTooltipConfig,
                     legend: { position: 'bottom', labels: { font: { family: 'Inter' }, usePointStyle: true, color: '#444' } }
