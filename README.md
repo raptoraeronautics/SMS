@@ -240,7 +240,7 @@
     <nav class="sticky-nav w-full sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
-                <div class="flex items-center gap-3 font-bold text-xl tracking-tight" style="color: var(--white);">
+                <div class="flex items-center gap-2 font-bold text-xl tracking-tight" style="color: var(--white);">
                     <img src="RAPTOR LOGO.v4.jpg" alt="Raptor Aeronautics" class="h-12 w-12 object-contain rounded-sm">
                     Program Metrics <span style="color: var(--titanium); font-weight: 300;">Interactive</span>
                 </div>
