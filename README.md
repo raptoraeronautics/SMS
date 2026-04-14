@@ -263,9 +263,9 @@
             <p class="text-lg mb-10 leading-relaxed" style="color: var(--titanium);">
                 Explore the critical vulnerabilities in scaling enterprise drone programs, and interact with the metrics driving the need for formal Safety Management Systems (SMS).
             </p>
-            <button class="cta-btn py-4 px-10 rounded-full shadow-lg text-sm uppercase tracking-widest mb-10">
+            <a href="https://forms.gle/qrccW5L2aNQsryzf9" target="_blank" class="cta-btn py-4 px-10 rounded-full shadow-lg text-sm uppercase tracking-widest inline-block">
                 Initiate Your Program Readiness Check
-            </button>
+            </a>
             <div class="inline-flex items-center justify-center space-x-10 border-t hero-divider pt-8 w-full">
                 <div class="text-center">
                     <div class="text-4xl font-black" style="color: var(--electric-green);">78%</div>
