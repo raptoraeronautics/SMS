@@ -1,4 +1,3 @@
- 
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,7 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
- 
+
         :root {
             --blackout: #000000;
             --deep-space: #303617;
@@ -16,13 +15,13 @@
             --titanium: #D9D9D9;
             --white: #FFFFFF;
         }
- 
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--deep-space);
             color: var(--white);
         }
- 
+
         .chart-container {
             position: relative;
             width: 100%;
@@ -32,25 +31,25 @@
             height: 350px;
             max-height: 400px;
         }
- 
+
         @media (min-width: 768px) {
             .chart-container { height: 400px; }
         }
- 
+
         .nav-btn.active {
             border-bottom: 3px solid var(--electric-green);
             color: var(--electric-green);
             font-weight: 600;
         }
- 
+
         .tab-content { display: none; }
         .tab-content.active { display: block; animation: fadeIn 0.4s ease-in-out; }
- 
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
- 
+
         .interactive-card {
             background: var(--blackout);
             border-radius: 0.75rem;
@@ -58,106 +57,88 @@
             border: 1px solid rgba(176, 204, 51, 0.15);
             transition: border-color 0.3s ease;
         }
- 
+
         .interactive-card:hover {
             border-color: rgba(176, 204, 51, 0.35);
         }
- 
+
         .step-btn.active {
             background-color: var(--electric-green);
             color: var(--blackout);
             border-color: var(--electric-green);
             font-weight: 700;
         }
- 
-        /* Sticky nav */
+
         .sticky-nav {
             background: rgba(0, 0, 0, 0.92);
             backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(176, 204, 51, 0.2);
         }
- 
-        /* CTA button */
+
         .cta-btn {
             background-color: var(--electric-green);
             color: var(--blackout);
             font-weight: 700;
             transition: background-color 0.2s ease, transform 0.2s ease;
         }
- 
+
         .cta-btn:hover {
             background-color: var(--titanium);
             transform: translateY(-2px);
         }
- 
-        /* Scenario buttons */
-        .scenario-btn-active {
-            background-color: var(--electric-green) !important;
-            color: var(--blackout) !important;
-            border-color: var(--electric-green) !important;
-            font-weight: 700;
-        }
- 
-        /* Step buttons default */
+
         .step-btn {
             background: var(--blackout);
             color: var(--titanium);
             border: 1px solid rgba(217,217,217,0.2);
             transition: all 0.2s ease;
         }
- 
+
         .step-btn:hover:not(.active) {
             border-color: var(--electric-green);
             color: var(--electric-green);
         }
- 
-        /* Cause detail panel */
+
         .cause-panel-active {
             background: rgba(176, 204, 51, 0.07) !important;
             border: 1px solid rgba(176, 204, 51, 0.25) !important;
         }
- 
-        /* Stat box */
+
         .stat-box {
             background: rgba(176, 204, 51, 0.08);
             border-left: 4px solid var(--electric-green);
         }
- 
-        /* Warning box */
+
         .warning-box {
             background: rgba(48, 54, 23, 0.8);
             border: 1px solid rgba(176, 204, 51, 0.3);
         }
- 
-        /* Select element */
+
         select {
             background-color: var(--blackout) !important;
             color: var(--white) !important;
             border: 1px solid rgba(176, 204, 51, 0.3) !important;
         }
- 
+
         select:focus {
             outline: none;
             border-color: var(--electric-green) !important;
             box-shadow: 0 0 0 2px rgba(176, 204, 51, 0.2);
         }
- 
+
         select option {
             background-color: var(--blackout);
             color: var(--white);
         }
- 
-        /* Header gradient */
+
         .hero-header {
             background: linear-gradient(180deg, var(--blackout) 0%, var(--deep-space) 100%);
         }
- 
-        /* Divider */
+
         .hero-divider {
             border-color: rgba(176, 204, 51, 0.2);
         }
- 
-        /* Scenario toggle bar */
+
         .scenario-bar {
             background: rgba(0,0,0,0.4);
             border: 1px solid rgba(217,217,217,0.1);
@@ -166,7 +147,7 @@
             display: inline-flex;
             gap: 4px;
         }
- 
+
         .scenario-btn {
             padding: 8px 20px;
             border-radius: 9999px;
@@ -178,14 +159,13 @@
             color: var(--titanium);
             background: transparent;
         }
- 
+
         .scenario-btn.active {
             background-color: var(--electric-green);
             color: var(--blackout);
             font-weight: 700;
         }
- 
-        /* Section labels */
+
         .section-label {
             display: inline-block;
             border: 1px solid var(--electric-green);
@@ -198,14 +178,7 @@
             border-radius: 2px;
             margin-bottom: 12px;
         }
- 
-        /* Stat highlight */
-        .stat-value {
-            color: var(--electric-green);
-            font-weight: 900;
-        }
- 
-        /* Step detail card */
+
         .step-detail-card {
             background: var(--blackout);
             border-top: 4px solid var(--electric-green);
@@ -214,21 +187,19 @@
             border-right: 1px solid rgba(176,204,51,0.15);
             border-bottom: 1px solid rgba(176,204,51,0.15);
         }
- 
-        /* Deliverables box */
+
         .deliverables-box {
             background: rgba(176, 204, 51, 0.06);
             border: 1px solid rgba(176, 204, 51, 0.2);
             border-radius: 0.5rem;
         }
- 
+
         .goal-box {
             background: rgba(48, 54, 23, 0.6);
             border: 1px solid rgba(176, 204, 51, 0.15);
             border-radius: 0.5rem;
         }
- 
-        /* Footer */
+
         footer {
             background: var(--blackout);
             border-top: 1px solid rgba(176, 204, 51, 0.15);
@@ -236,7 +207,7 @@
     </style>
 </head>
 <body class="antialiased flex flex-col min-h-screen">
- 
+
     <nav class="sticky-nav w-full sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
@@ -253,7 +224,7 @@
             </div>
         </div>
     </nav>
- 
+
     <header class="hero-header text-white py-20 px-6">
         <div class="max-w-4xl mx-auto text-center">
             <span class="section-label">Tactical Intelligence</span>
@@ -263,7 +234,7 @@
             <p class="text-lg mb-10 leading-relaxed" style="color: var(--titanium);">
                 Explore the critical vulnerabilities in scaling enterprise drone programs, and interact with the metrics driving the need for formal Safety Management Systems (SMS).
             </p>
-            <a href="https://forms.gle/qrccW5L2aNQsryzf9" target="_blank" class="cta-btn py-4 px-10 rounded-full shadow-lg text-sm uppercase tracking-widest inline-block">
+            <a href="https://forms.gle/qrccW5L2aNQsryzf9" target="_blank" class="cta-btn py-4 px-10 rounded-full shadow-lg text-sm uppercase tracking-widest inline-block mb-10">
                 Initiate Your Program Readiness Check
             </a>
             <div class="inline-flex items-center justify-center space-x-10 border-t hero-divider pt-8 w-full">
@@ -279,9 +250,9 @@
             </div>
         </div>
     </header>
- 
+
     <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
- 
+
         <!-- OVERVIEW -->
         <section id="panel-overview" class="tab-content active">
             <div class="mb-10 text-center">
@@ -291,7 +262,7 @@
                     This section identifies vulnerabilities faced by enterprise drone fleets over the past 36 months. Understanding the root causes of failure is the first step toward operational resilience. Interact with the chart to view key insights regarding each category of program failure.
                 </p>
             </div>
- 
+
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
                 <div class="interactive-card p-6">
                     <h3 class="text-xs font-bold uppercase tracking-widest mb-6 text-center" style="color: var(--titanium);">Failure Root Cause Distribution</h3>
@@ -300,7 +271,7 @@
                     </div>
                     <p class="text-xs text-center mt-4" style="color: rgba(217,217,217,0.5);">Click segments to load contextual analysis.</p>
                 </div>
- 
+
                 <div class="interactive-card p-8 h-full flex flex-col justify-center transition-all duration-300" id="cause-detail-panel">
                     <div class="text-4xl mb-4" id="cause-icon">🔍</div>
                     <h3 class="text-xl font-bold mb-3" style="color: var(--white);" id="cause-title">Select a category</h3>
@@ -312,7 +283,7 @@
                 </div>
             </div>
         </section>
- 
+
         <!-- GAP ANALYSIS -->
         <section id="panel-gaps" class="tab-content">
             <div class="mb-10 text-center">
@@ -322,17 +293,17 @@
                     Traditional aviation relies on stringent protocols (Part 135/121). Drone programs often operate on ad-hoc rules. This section visualizes the disparity. Use the selector below to model different levels of enterprise drone program maturity against the gold standard of crewed aviation safety practices.
                 </p>
             </div>
- 
+
             <div class="interactive-card p-6 lg:p-10">
                 <div class="flex flex-col md:flex-row justify-between items-center mb-8 p-4 rounded-lg" style="background: rgba(176,204,51,0.06); border: 1px solid rgba(176,204,51,0.2);">
                     <label for="maturitySelect" class="font-semibold mb-2 md:mb-0 mr-4" style="color: var(--white);">Select Program Maturity Level to Model:</label>
                     <select id="maturitySelect" class="text-sm rounded-lg block p-2.5 cursor-pointer">
                         <option value="average">Established Program (Standardized)</option>
                         <option value="novice">Foundational Program (Initial)</option>
-                        <option value="advanced">Optimized Program (Post Audit) </option>
+                        <option value="advanced">Optimized Program (Post Audit)</option>
                     </select>
                 </div>
- 
+
                 <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-center">
                     <div class="lg:col-span-3">
                         <div class="chart-container">
@@ -352,17 +323,17 @@
                 </div>
             </div>
         </section>
- 
+
         <!-- RISK FORECASTER -->
         <section id="panel-forecast" class="tab-content">
             <div class="mb-10 text-center">
                 <span class="section-label">Trend Forecast</span>
                 <h2 class="text-2xl font-bold mb-3" style="color: var(--white);">Risk Escalation Forecaster</h2>
                 <p class="leading-relaxed max-w-3xl mx-auto" style="color: var(--titanium);">
-                    As flight hours scale exponentially, risk does not scale linearly if foundational safety systems are weak; it compounds. This interactive forecaster demonstrates the projected unmitigated safety incidents relative to flight volume. Toggle between growth scenarios to see the impact of operational scaling without SMS intervention.
+                    Risk does not scale linearly if foundational safety systems are weak. As flight hours scale exponentially, risk compounds. This interactive forecaster demonstrates the projected unmitigated safety incidents relative to flight volume. Toggle between growth scenarios to see the impact of operational scaling without SMS intervention.
                 </p>
             </div>
- 
+
             <div class="interactive-card p-6">
                 <div class="flex justify-center gap-0 mb-8">
                     <div class="scenario-bar">
@@ -370,17 +341,17 @@
                         <button class="scenario-btn" data-scenario="aggressive">Aggressive Automation Scaling</button>
                     </div>
                 </div>
- 
+
                 <div class="chart-container relative" style="height: 450px;">
                     <canvas id="mixedChart"></canvas>
                 </div>
- 
+
                 <div class="mt-8 text-center max-w-2xl mx-auto">
                     <p class="text-sm" style="color: var(--titanium);">Without a <span style="color: var(--electric-green); font-weight: 700;">positive safety culture</span> embedded into the operational foundation, safety incidents and unmitigated risks grow at a disproportionate rate to flight volume.</p>
                 </div>
             </div>
         </section>
- 
+
         <!-- READINESS FRAMEWORK -->
         <section id="panel-solution" class="tab-content">
             <div class="mb-10 text-center">
@@ -390,7 +361,7 @@
                     To mitigate these compounding risks and close the aviation safety gap, we deploy a structured, four phase engagement. This transforms a drone program from a reactive tool into a proactive, aviation grade operation. Click each phase to reveal the underlying methodology.
                 </p>
             </div>
- 
+
             <div class="flex flex-col md:flex-row gap-4 mb-8 justify-center">
                 <button class="step-btn active px-6 py-3 rounded-lg font-semibold transition-all w-full md:w-auto text-left md:text-center" data-step="1">1. Deep Audit</button>
                 <div class="hidden md:flex items-center font-bold" style="color: rgba(217,217,217,0.3);">➔</div>
@@ -400,11 +371,11 @@
                 <div class="hidden md:flex items-center font-bold" style="color: rgba(217,217,217,0.3);">➔</div>
                 <button class="step-btn px-6 py-3 rounded-lg font-semibold transition-all w-full md:w-auto text-left md:text-center" data-step="4">4. Monitoring</button>
             </div>
- 
+
             <div class="step-detail-card p-8" id="step-detail-container">
                 <h3 class="text-2xl font-bold mb-2" style="color: var(--white);" id="step-title">Phase 1: Comprehensive Baseline Audit</h3>
                 <p class="leading-relaxed mb-6" style="color: var(--titanium);" id="step-desc">A forensic review of your current operational reality. We step outside the boardroom and review actual flight logs, maintenance spreadsheets, and pilot currency records to determine ground truth vs. documented policy.</p>
- 
+
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="deliverables-box p-4">
                         <h4 class="font-semibold text-sm uppercase tracking-wide mb-2" style="color: var(--electric-green);">Key Deliverables</h4>
@@ -420,27 +391,26 @@
                     </div>
                 </div>
             </div>
- 
+
             <div class="mt-16 text-center">
                 <a href="https://forms.gle/qrccW5L2aNQsryzf9" target="_blank" class="cta-btn py-4 px-10 rounded-full shadow-lg text-sm uppercase tracking-widest inline-block">
                     Initiate Your Program Readiness Check
                 </a>
             </div>
         </section>
- 
+
     </main>
- 
+
     <footer class="py-8 text-center text-sm mt-auto" style="color: var(--titanium);">
         <div class="max-w-7xl mx-auto px-6">
             <p>&copy; 2026 Raptor Aeronautics LLC | Data visualizations reflect modeled industry trends, derived from publicly available FAA incident data, HFACS research on unmanned systems, IS-BAO and WYVERN operating standards.</p>
         </div>
     </footer>
- 
+
     <script>
-        // Chart.js global defaults
         Chart.defaults.color = '#D9D9D9';
         Chart.defaults.font.family = 'Inter';
- 
+
         const wrapLabel = (label, maxChars = 16) => {
             if (label.length <= maxChars) return label;
             const words = label.split(' ');
@@ -457,7 +427,7 @@
             if (currentLine) lines.push(currentLine.trim());
             return lines;
         };
- 
+
         const commonTooltipConfig = {
             callbacks: {
                 title: function(tooltipItems) {
@@ -476,7 +446,7 @@
             titleColor: '#B0CC33',
             bodyColor: '#D9D9D9'
         };
- 
+
         // NAV
         document.querySelectorAll('.nav-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
@@ -490,15 +460,15 @@
                 document.getElementById(e.target.getAttribute('data-target')).classList.add('active');
             });
         });
- 
+
         // DOUGHNUT
         const causeDataDetails = {
             0: { title: "Procedural Compliance", icon: "📑", desc: "Failures occurring when pilots deviate from established Standard Operating Procedures (SOPs). Often symptomatic of overly complex, unreadable, or outdated manual sets that don't reflect field reality.", insight: "Simplifying SOPs and instituting universal preflight checklists reduced these errors by 40% in post audit programs." },
-            1: { title: "Inadequate Training", icon: "👨‍✈️", desc: "Accidents caused by pilots lacking specific training for complex scenarios (e.g., strong magnetic interference, automated flight modes, autonomous system failsafes). Part 107 certification does not equate to mission readiness.", insight: "Programs lacking scenario based training experience 3x higher hardware attrition rates." },
+            1: { title: "Inadequate Training", icon: "👨‍✈️", desc: "Accidents caused by pilots lacking specific training for complex scenarios (e.g., strong magnetic interference, automated missions, system triggered failsafes). Part 107 certification does not equate to mission readiness.", insight: "Programs lacking scenario based training experience 3x higher hardware attrition rates." },
             2: { title: "Hardware/Software", icon: "⚙️", desc: "System failures, firmware glitches, or component degradation. While heavily scrutinized, they represent a minority of total failures compared to human factors.", insight: "Implementing proactive maintenance schedules catches 85% of hardware issues before flight." },
-            3: { title: "Environmental Factors", icon: "🌩️", desc: "Loss of assets due to unpredicted micro weather events, sudden wind shear, or bird strikes. Often exacerbated by poor preflight weather risk assessment.", insight: "Applying the impact of environmental factors on aircraft performance mitigates severe environmental losses." }
+            3: { title: "Environmental Factors", icon: "🌩️", desc: "Loss of assets due to unexpected micro weather events, extreme temperatures, or RF interference. Often exacerbated by gaps in preflight risk assessment.", insight: "Applying the impact of environmental factors on aircraft performance mitigates severe environmental losses." }
         };
- 
+
         const causeCtx = document.getElementById('causeChart').getContext('2d');
         const causeChart = new Chart(causeCtx, {
             type: 'doughnut',
@@ -534,7 +504,7 @@
                 }
             }
         });
- 
+
         // RADAR
         const maturityProfiles = {
             average: {
@@ -553,7 +523,7 @@
                 warning: "Even at advanced stages, 'Incident Root Cause Analysis' requires continuous cultural reinforcement to prevent reporting complacency."
             }
         };
- 
+
         const radarCtx = document.getElementById('radarChart').getContext('2d');
         const radarLabelsRaw = ["Preventative Maintenance", "Pilot Currency", "Preflight Risk Assessment", "Root Cause Analysis", "Standard Operating Procedures"];
         const radarChart = new Chart(radarCtx, {
@@ -600,15 +570,15 @@
                 }
             }
         });
- 
+
         document.getElementById('maturitySelect').addEventListener('change', (e) => {
             const profile = maturityProfiles[e.target.value];
             radarChart.data.datasets[1].data = profile.data;
             radarChart.update();
- 
+
             document.getElementById('radar-context').style.opacity = 0;
             document.getElementById('radar-warning').style.opacity = 0;
- 
+
             setTimeout(() => {
                 document.getElementById('radar-context').textContent = profile.context;
                 document.getElementById('radar-warning').textContent = profile.warning;
@@ -618,13 +588,13 @@
                 document.getElementById('radar-warning').style.transition = "opacity 0.3s";
             }, 150);
         });
- 
+
         // MIXED CHART
         const forecastData = {
             moderate: { flightHours: [10, 25, 45, 75, 110, 150], incidents: [5, 14, 38, 85, 150, 240] },
             aggressive: { flightHours: [10, 35, 80, 160, 280, 450], incidents: [5, 22, 75, 190, 410, 780] }
         };
- 
+
         const mixedCtx = document.getElementById('mixedChart').getContext('2d');
         const mixedLabelsRaw = ["Year 1", "Year 2", "Year 3", "Year 4 (Proj.)", "Year 5 (Proj.)", "Year 6 (Proj.)"];
         const mixedChart = new Chart(mixedCtx, {
@@ -667,31 +637,46 @@
                     x: { grid: { display: false }, ticks: { font: { family: 'Inter' }, color: '#D9D9D9' } },
                     y: {
                         type: 'linear', display: true, position: 'left',
+                        min: 0,
+                        max: 300,
                         title: { display: true, text: 'Flight Hours', font: { family: 'Inter', weight: 'bold' }, color: '#D9D9D9' },
                         grid: { color: 'rgba(176, 204, 51, 0.08)' },
-                        ticks: { color: '#D9D9D9' }
+                        ticks: { color: '#D9D9D9', count: 6 }
                     },
                     y1: {
                         type: 'linear', display: true, position: 'right',
+                        min: 0,
+                        max: 300,
                         title: { display: true, text: 'Safety Incidents', font: { family: 'Inter', weight: 'bold' }, color: '#B0CC33' },
                         grid: { drawOnChartArea: false },
-                        ticks: { color: '#B0CC33' }
+                        ticks: { color: '#B0CC33', count: 6 }
                     }
                 }
             }
         });
- 
+
+        // Scenario toggle — updates data AND rescales both axes per scenario
         document.querySelectorAll('.scenario-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 document.querySelectorAll('.scenario-btn').forEach(b => b.classList.remove('active'));
                 e.target.classList.add('active');
+
                 const scenario = e.target.getAttribute('data-scenario');
                 mixedChart.data.datasets[0].data = forecastData[scenario].incidents;
                 mixedChart.data.datasets[1].data = forecastData[scenario].flightHours;
+
+                if (scenario === 'aggressive') {
+                    mixedChart.options.scales.y.max = 800;
+                    mixedChart.options.scales.y1.max = 800;
+                } else {
+                    mixedChart.options.scales.y.max = 300;
+                    mixedChart.options.scales.y1.max = 300;
+                }
+
                 mixedChart.update();
             });
         });
- 
+
         // STEP DETAILS
         const stepDetails = {
             "1": {
@@ -719,17 +704,17 @@
                 goal: "Transition the program from reactive hazard management to proactive, data driven operational excellence."
             }
         };
- 
+
         document.querySelectorAll('.step-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 document.querySelectorAll('.step-btn').forEach(b => b.classList.remove('active'));
                 e.target.classList.add('active');
- 
+
                 const step = e.target.getAttribute('data-step');
                 const data = stepDetails[step];
                 const container = document.getElementById('step-detail-container');
                 container.style.opacity = 0;
- 
+
                 setTimeout(() => {
                     document.getElementById('step-title').textContent = data.title;
                     document.getElementById('step-desc').textContent = data.desc;
