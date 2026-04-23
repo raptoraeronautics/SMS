@@ -616,7 +616,7 @@
                     },
                     {
                         type: 'bar',
-                        label: 'Enterprise Flight Hours (x100)',
+                        label: 'Enterprise Flight Hours (x10)',
                         data: forecastData.moderate.flightHours,
                         backgroundColor: 'rgba(217, 217, 217, 0.2)',
                         hoverBackgroundColor: 'rgba(217, 217, 217, 0.35)',
