@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UAS Program Readiness Check | Raptor Aeronautics</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@300;400;500;600&display=swap');
+
+        :root {
+            --blackout: #000000;
+            --deep-space: #303617;
+            --electric-green: #B0CC33;
+            --titanium: #D9D9D9;
+            --white: #FFFFFF;
+            --card-bg: #0a0a0a;
+            --border: rgba(176, 204, 51, 0.2);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Barlow', sans-serif;
+            background-color: var(--blackout);
+            color: var(--white);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* NAV */
+        .nav {
+            background: rgba(0,0,0,0.95);
+            border-bottom: 1px solid var(--border);
+            padding: 0 2rem;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        .nav-brand img {
+            height: 36px;
+            width: 36px;
+            object-fit: contain;
+        }
+
+        .nav-label {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--electric-green);
+            border: 1px solid var(--electric-green);
+            padding: 3px 10px;
+            border-radius: 2px;
+        }
+
+        /* MAIN WRAPPER */
+        .main {
+            flex: 1;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 3rem 1.5rem;
+        }
+
+        /* FORM CARD */
+        .form-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            width: 100%;
+            max-width: 680px;
+            overflow: hidden;
+        }
+
+        .form-card-header {
+            background: linear-gradient(135deg, #0d1400 0%, var(--deep-space) 100%);
+            padding: 2rem 2.5rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .form-card-header .eyebrow {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--electric-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-card-header h1 {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: 0.02em;
+            line-height: 1.1;
+            color: var(--white);
+        }
+
+        .form-card-header p {
+            font-size: 0.85rem;
+            color: var(--titanium);
+            margin-top: 0.5rem;
+            font-weight: 300;
+            line-height: 1.5;
+        }
+
+        .form-card-body {
+            padding: 2rem 2.5rem;
+        }
+
+        /* SCREENS */
+        .screen { display: none; }
+        .screen.active { display: block; }
+
+        /* INTAKE SCREEN */
+        .field-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .field-label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--electric-green);
+            margin-bottom: 0.4rem;
+        }
+
+        .field-input {
+            width: 100%;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(176,204,51,0.25);
+            border-radius: 6px;
+            padding: 0.75rem 1rem;
+            color: var(--white);
+            font-family: 'Barlow', sans-serif;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .field-input:focus {
+            border-color: var(--electric-green);
+            background: rgba(176,204,51,0.04);
+        }
+
+        .field-input::placeholder { color: rgba(217,217,217,0.3); }
+
+        /* QUESTION SCREEN */
+        .q-counter {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--titanium);
+            opacity: 0.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .q-text {
+            font-size: 1.05rem;
+            font-weight: 500;
+            line-height: 1.6;
+            color: var(--white);
+            margin-bottom: 2rem;
+            min-height: 80px;
+        }
+
+        .q-keyword {
+            color: var(--electric-green);
+            font-weight: 600;
+        }
+
+        .yn-group {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .yn-btn {
+            flex: 1;
+            padding: 0.9rem;
+            border-radius: 8px;
+            border: 1px solid rgba(217,217,217,0.15);
+            background: transparent;
+            color: var(--titanium);
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .yn-btn:hover {
+            border-color: var(--electric-green);
+            color: var(--electric-green);
+        }
+
+        .yn-btn.selected-yes {
+            background: var(--electric-green);
+            border-color: var(--electric-green);
+            color: var(--blackout);
+        }
+
+        .yn-btn.selected-no {
+            background: rgba(217,217,217,0.1);
+            border-color: rgba(217,217,217,0.4);
+            color: var(--white);
+        }
+
+        /* PROGRESS BAR */
+        .progress-wrap {
+            margin-top: 1.5rem;
+        }
+
+        .progress-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.7rem;
+            color: rgba(217,217,217,0.5);
+            margin-bottom: 0.4rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+        }
+
+        .progress-track {
+            height: 3px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--electric-green);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        /* BUTTONS */
+        .btn-primary {
+            width: 100%;
+            padding: 0.9rem;
+            background: var(--electric-green);
+            color: var(--blackout);
+            border: none;
+            border-radius: 8px;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 800;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-top: 0.5rem;
+        }
+
+        .btn-primary:hover {
+            background: var(--titanium);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* RESULTS SCREEN */
+        .results-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (max-width: 600px) {
+            .results-grid { grid-template-columns: 1fr; }
+            .form-card-body { padding: 1.5rem; }
+            .form-card-header { padding: 1.5rem; }
+        }
+
+        .radar-wrap {
+            position: relative;
+            height: 280px;
+        }
+
+        .maturity-panel {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .maturity-level-badge {
+            display: inline-block;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.6rem;
+            font-weight: 800;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--blackout);
+            background: var(--electric-green);
+            padding: 3px 10px;
+            border-radius: 2px;
+            margin-bottom: 0.75rem;
+        }
+
+        .maturity-title {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 0.75rem;
+            line-height: 1.2;
+        }
+
+        .maturity-text {
+            font-size: 0.78rem;
+            color: var(--titanium);
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        .maturity-text strong {
+            color: var(--electric-green);
+            font-weight: 600;
+        }
+
+        .maturity-section {
+            margin-bottom: 0.75rem;
+        }
+
+        .maturity-section-label {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--electric-green);
+            margin-bottom: 0.25rem;
+        }
+
+        .score-summary {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: rgba(176,204,51,0.05);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+        }
+
+        .score-tile {
+            text-align: center;
+        }
+
+        .score-tile-val {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--electric-green);
+            line-height: 1;
+        }
+
+        .score-tile-label {
+            font-size: 0.55rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--titanium);
+            opacity: 0.7;
+            margin-top: 0.2rem;
+        }
+
+        .contact-bar {
+            text-align: center;
+            padding: 1rem;
+            border-top: 1px solid var(--border);
+            margin-top: 0.5rem;
+            font-size: 0.8rem;
+            color: var(--titanium);
+        }
+
+        .contact-bar a {
+            color: var(--electric-green);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .contact-bar a:hover { text-decoration: underline; }
+
+        /* SUBMITTING STATE */
+        .submitting-msg {
+            text-align: center;
+            padding: 2rem;
+            color: var(--titanium);
+            font-size: 0.9rem;
+        }
+
+        .spinner {
+            width: 32px;
+            height: 32px;
+            border: 3px solid rgba(176,204,51,0.2);
+            border-top-color: var(--electric-green);
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* FADE TRANSITION */
+        .fade-in {
+            animation: fadeUp 0.3s ease forwards;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ERROR */
+        .error-msg {
+            font-size: 0.75rem;
+            color: #ff6b6b;
+            margin-top: 0.4rem;
+            display: none;
+        }
+
+        .error-msg.visible { display: block; }
+    </style>
+</head>
+<body>
+
+    <nav class="nav">
+        <a href="index.html" class="nav-brand">
+            <img src="RAPTOR LOGO.v4.jpg" alt="Raptor Aeronautics">
+            RAPTOR AERONAUTICS
+        </a>
+        <span class="nav-label">Program Readiness Check</span>
+    </nav>
+
+    <div class="main">
+        <div class="form-card">
+
+            <div class="form-card-header">
+                <div class="eyebrow">Raptor Aeronautics | OSS Assessment</div>
+                <h1>UAS Program<br>Readiness Check</h1>
+                <p>50 questions. 5 minutes. A clear picture of where your program stands against aviation-grade safety standards.</p>
+            </div>
+
+            <div class="form-card-body">
+
+                <!-- SCREEN 1: INTAKE -->
+                <div class="screen active" id="screen-intake">
+                    <div class="field-group">
+                        <label class="field-label" for="companyName">Company Name</label>
+                        <input class="field-input" type="text" id="companyName" placeholder="Acme Drone Operations LLC" autocomplete="organization">
+                        <div class="error-msg" id="err-company">Please enter your company name.</div>
+                    </div>
+                    <div class="field-group">
+                        <label class="field-label" for="fleetSize">Fleet Size</label>
+                        <input class="field-input" type="text" id="fleetSize" placeholder="e.g. 12 aircraft" autocomplete="off">
+                        <div class="error-msg" id="err-fleet">Please enter your fleet size.</div>
+                    </div>
+                    <div class="field-group">
+                        <label class="field-label" for="contactEmail">Contact Email</label>
+                        <input class="field-input" type="email" id="contactEmail" placeholder="you@company.com" autocomplete="email">
+                        <div class="error-msg" id="err-email">Please enter a valid email address.</div>
+                    </div>
+                    <button class="btn-primary" id="btn-next-intake">Next →</button>
+                </div>
+
+                <!-- SCREEN 2: QUESTIONS -->
+                <div class="screen" id="screen-questions">
+                    <div class="q-counter" id="q-counter">Question 1 of 50</div>
+                    <div class="q-text fade-in" id="q-text"></div>
+                    <div class="yn-group">
+                        <button class="yn-btn" id="btn-yes" onclick="selectAnswer(true)">Yes</button>
+                        <button class="yn-btn" id="btn-no" onclick="selectAnswer(false)">No</button>
+                    </div>
+                    <button class="btn-primary" id="btn-next-q" disabled onclick="nextQuestion()">Next →</button>
+                    <div class="progress-wrap">
+                        <div class="progress-meta">
+                            <span id="prog-label">0 of 50 complete</span>
+                            <span id="prog-pct">0%</span>
+                        </div>
+                        <div class="progress-track">
+                            <div class="progress-fill" id="prog-fill" style="width:0%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SCREEN 3: SUBMITTING -->
+                <div class="screen" id="screen-submitting">
+                    <div class="submitting-msg">
+                        <div class="spinner"></div>
+                        Scoring your program and submitting results...
+                    </div>
+                </div>
+
+                <!-- SCREEN 4: RESULTS -->
+                <div class="screen" id="screen-results">
+                    <div class="score-summary" id="score-summary"></div>
+                    <div class="results-grid">
+                        <div class="radar-wrap">
+                            <canvas id="resultsRadar"></canvas>
+                        </div>
+                        <div class="maturity-panel" id="maturity-panel"></div>
+                    </div>
+                    <div class="contact-bar">
+                        Reach us at <a href="https://www.raptoraero.net/contact" target="_blank">raptoraero.net/contact</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ─── APPS SCRIPT ENDPOINT ───────────────────────────────────────────
+        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxQ-3FGC-z-wQsiNI3b6FAkDG7Fzxbhz_v4qjUCM9HS4XIXi7CajhZpKCbMl3g1uPEOVA/exec';
+
+        // ─── QUESTIONS ───────────────────────────────────────────────────────
+        const questions = [
+            "Accountable Executive: Is a senior leader (with budget authority) formally named as the person ultimately responsible for flight safety?",
+            "Safety Manager Designation: Is there a designated Safety Manager whose role is documented as being independent of production (the pressure to fly)?",
+            "Defined Authorities: Are the specific authorities of the Remote Pilot in Command (RPIC) vs. the Program Manager documented in writing?",
+            "Resource Commitment: Is there a documented budget allocation specifically for safety equipment, training, and SMS software?",
+            "Compliance Tracking: Is there a formal process to track and document changes in FAA/local regulations?",
+            "Program Manual: Does a centralized General Operations Manual (GOM) exist that dictates how the program functions across all locations?",
+            "Legal/Insurance Review: Is there a documented annual review process for drone insurance limits against current operational risks?",
+            "Management Review: Does leadership meet formally (at least twice a year) to review safety performance data?",
+            "Record Retention: Is there a formal policy defining how long flight logs, maintenance records, and safety reports are kept?",
+            "Scale Strategy: Is there a documented plan for how the safety culture will be maintained if the fleet size doubles?",
+            "Safety Policy Statement: Is there a written policy stating the organization's commitment to safety, signed by the CEO or owner?",
+            "Non-Punitive Reporting: Is there a written Just Culture policy guaranteeing that employees won't be punished for reporting honest mistakes?",
+            "Safety Objectives: Are there three or more written, measurable safety goals for the current year?",
+            "Emergency Response Plan (ERP): Is there a written What to do if... document for crashes, lost links, or injuries?",
+            "ERP Accessibility: Is the ERP physically or digitally available to every pilot during every flight?",
+            "Stakeholder Awareness: Have external stakeholders (Legal, HR, IT) been formally briefed on their roles in an aviation emergency?",
+            "Manual Control: Is there a process to ensure all pilots are using the latest version of the operations manual?",
+            "Safety Accountability: Do job descriptions for all personnel (not just pilots) include their specific safety responsibilities?",
+            "Continuous Improvement Policy: Is there a written commitment to evolve the safety system based on data?",
+            "Third-Party Standards: Has the organization documented which external standards (e.g., NBAA, ISO, IS-BAO) it intends to align with?",
+            "Hazard Log: Does a central document exist where all identified hazards (not just accidents) are recorded?",
+            "Risk Assessment Tool: Is there a formal Pre-Flight Risk Assessment (FRAT) tool that pilots must complete before every mission?",
+            "Standardized Risk Matrix: Does the organization have a documented 5x5 (or similar) matrix to define High, Medium, and Low risk?",
+            "Risk Thresholds: Is it documented who (e.g., Safety Manager vs. RPIC) has the authority to sign off on a Medium or High-risk flight?",
+            "Hazard Identification Process: Is there a documented method for how the team identifies new hazards (e.g., brainstorming, industry news)?",
+            "Mitigation Tracking: When a risk is identified, is the specific action taken to lower that risk documented?",
+            "Management of Change (MOC): Is there a formal checklist used before introducing a new drone, new software, or a new operating area?",
+            "Strategic Risk: Is there a documented assessment of organizational risks (e.g., pilot turnover, supply chain failure)?",
+            "Operational Go/No-Go Criteria: Are weather, battery, and site-specific minimums written down as hard limits?",
+            "Post-Flight Reporting: Is there a formal process to capture hazard and incident data after a flight is completed?",
+            "Data Privacy Policy: Is there a written policy on how captured imagery is stored, who owns it, and when it must be deleted?",
+            "C2 Security: Is there a documented protocol for securing the command-and-control links against interference or hijacking?",
+            "Firmware Management: Is there a formal process for vetting and documenting drone firmware updates before they are pushed to the fleet?",
+            "Ground Control Station (GCS) Security: Are there documented requirements for password complexity and multi-factor authentication for flight apps?",
+            "Data Security: Is it documented where the drone's telemetry and flight data are stored (and in which country)?",
+            "Hardware Vulnerability: Is there a list of approved/prohibited hardware based on security concerns (e.g., Blue UAS vs. non-vetted)?",
+            "Lost Link Logic: Are the fail-safe settings for every aircraft documented and verified before flight?",
+            "C2 Link Integrity: Does the organization have a process to verify signal strength/coverage in a mission area before deployment?",
+            "Reliability Centered Maintenance: Are there documented standards for maintenance procedures that formally feed into a Quality Control process?",
+            "Cyber Incident Response: Does the ERP include a section on how to handle a data breach or hijacked control link?",
+            "Training Records: Is there a centralized folder containing proof of training for every pilot (beyond just the Part 107 cert)?",
+            "Currency Requirements: Is there a documented policy on how many flights a pilot must perform monthly to remain current?",
+            "SMS Induction: Do new hires receive a formal briefing on the SMS and how to report hazards on day one?",
+            "Safety Communication: Is there a documented Safety Bulletin or email process used to share lessons learned?",
+            "Competency Assessments: Is there a written Check Ride protocol used to evaluate pilot skill annually?",
+            "Human Factors Training: Does the program provide documented training on fatigue, stress, and crew resource management (CRM)?",
+            "Technical Training: Is there specific training for the drone, C2 systems and advanced sensors being used?",
+            "External Feedback: Is there a process to receive and document safety concerns from the public or clients?",
+            "Safety Culture Surveys: Does the organization have a plan to survey staff annually about their feeling of safety?",
+            "Internal Conformance (ISO 19011): Is there a documented internal audit schedule to check if the program is following its own rules?"
+        ];
+
+        // ─── PILLAR MAPPING (0-indexed question numbers) ────────────────────
+        // PM: Q9,32,33,35,36,39  (indices 8,31,32,34,35,38)
+        // HMI: Q41,42,45,46,47  (indices 40,41,44,45,46)
+        // PRAT: Q14,15,21,22,23,24,25,26,28,29,37,38  (indices 13,14,20,21,22,23,24,25,27,28,36,37)
+        // RCA: Q8,12,13,16,19,30,40,43,44,48,49,50  (indices 7,11,12,15,18,29,39,42,43,47,48,49)
+        // SOP: Q1,2,3,4,5,6,7,10,11,17,18,20,27,31,34  (indices 0,1,2,3,4,5,6,9,10,16,17,19,26,30,33)
+
+        const pillarMap = {
+            PM:   [8,31,32,34,35,38],
+            HMI:  [40,41,44,45,46],
+            PRAT: [13,14,20,21,22,23,24,25,27,28,36,37],
+            RCA:  [7,11,12,15,18,29,39,42,43,47,48,49],
+            SOP:  [0,1,2,3,4,5,6,9,10,16,17,19,26,30,33]
+        };
+
+        const pillarTotals = { PM: 6, HMI: 5, PRAT: 12, RCA: 12, SOP: 15 };
+
+        // ─── MATURITY PROFILES ───────────────────────────────────────────────
+        const maturityProfiles = {
+            1: {
+                badge: "Level 1",
+                title: "Foundational\n(Initial Operations)",
+                status: "You have successfully launched flight operations, but your safety and oversight framework is currently reactive.",
+                risk: "High. Your program likely carries invisible regulatory and liability exposure. In an enterprise environment, scaling at this level often leads to a compliance debt that becomes more expensive to fix the longer it is ignored.",
+                gap: "Your current structure relies on individual pilot skill rather than standardized organizational processes.",
+                action: "Transition to a proactive model. A Raptor Aeronautics Baseline Audit will identify your highest-priority gaps and deliver a 60–90 day action plan to stabilize your compliance footprint."
+            },
+            2: {
+                badge: "Level 2",
+                title: "Established\n(Standardized Operations)",
+                status: "You have a documented framework in place. You have moved beyond basic flight to a program with defined procedures.",
+                risk: "Moderate. The primary risk at this stage is Document to Reality Divergence — where your manuals say one thing, but your operational data shows another. This is the most common tier for programs to stall during a corporate audit.",
+                gap: "You have the Manuals but lack the Mechanisms — the automated or recurring checks to verify that safety standards are being met in the field.",
+                action: "Implement a verification layer. A Program Readiness Audit from Raptor Aeronautics identifies exactly where your operational reality has diverged from your policy, ensuring your program is audit ready rather than just documented."
+            },
+            3: {
+                badge: "Level 3",
+                title: "Optimized\n(High Reliability Operations)",
+                status: "You are operating in the top 5% of commercial drone programs. Your framework demonstrates the safety discipline required for complex authorizations and high-stakes enterprise contracts.",
+                risk: "You have built a strategic asset. Your maturity level enables the pursuit of BVLOS waivers and formal third-party certifications like IS-BAO or Wyvern.",
+                gap: "At this level, the gap is often the lack of a formal Seal of Approval that external stakeholders and insurance carriers recognize to grant you a competitive advantage in procurement.",
+                action: "Pursue formal certification. Raptor Aeronautics specializes in building the pathways to IS-BAO and Wyvern certification. Let's discuss your roadmap to becoming a certified industry leader."
+            }
+        };
+
+        // ─── STATE ───────────────────────────────────────────────────────────
+        let currentQ = 0;
+        let answers = new Array(50).fill(null);
+        let currentSelection = null;
+
+        // ─── SCREEN TRANSITIONS ──────────────────────────────────────────────
+        function showScreen(id) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+        }
+
+        // ─── INTAKE VALIDATION ───────────────────────────────────────────────
+        document.getElementById('btn-next-intake').addEventListener('click', () => {
+            const company = document.getElementById('companyName').value.trim();
+            const fleet   = document.getElementById('fleetSize').value.trim();
+            const email   = document.getElementById('contactEmail').value.trim();
+            let valid = true;
+
+            const emailRx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            document.getElementById('err-company').classList.toggle('visible', !company);
+            document.getElementById('err-fleet').classList.toggle('visible', !fleet);
+            document.getElementById('err-email').classList.toggle('visible', !emailRx.test(email));
+
+            if (!company || !fleet || !emailRx.test(email)) return;
+
+            showScreen('screen-questions');
+            renderQuestion(0);
+        });
+
+        // ─── QUESTION RENDERING ──────────────────────────────────────────────
+        function renderQuestion(idx) {
+            currentSelection = answers[idx]; // restore if navigating back
+
+            const qText = document.getElementById('q-text');
+            qText.classList.remove('fade-in');
+            void qText.offsetWidth;
+            qText.classList.add('fade-in');
+
+            // Bold the keyword (text before first colon)
+            const raw = questions[idx];
+            const colonIdx = raw.indexOf(':');
+            if (colonIdx > -1) {
+                const keyword = raw.substring(0, colonIdx);
+                const rest = raw.substring(colonIdx);
+                qText.innerHTML = `<span class="q-keyword">${keyword}</span>${rest}`;
+            } else {
+                qText.textContent = raw;
+            }
+
+            document.getElementById('q-counter').textContent = `Question ${idx + 1} of 50`;
+
+            // Restore selection state
+            const btnYes = document.getElementById('btn-yes');
+            const btnNo  = document.getElementById('btn-no');
+            btnYes.className = 'yn-btn';
+            btnNo.className  = 'yn-btn';
+
+            if (currentSelection === true)  btnYes.classList.add('selected-yes');
+            if (currentSelection === false) btnNo.classList.add('selected-no');
+
+            const nextBtn = document.getElementById('btn-next-q');
+            nextBtn.disabled = (currentSelection === null);
+
+            // Last question → change button to Submit
+            if (idx === 49) {
+                nextBtn.textContent = 'Submit →';
+                nextBtn.onclick = submitForm;
+            } else {
+                nextBtn.textContent = 'Next →';
+                nextBtn.onclick = nextQuestion;
+            }
+
+            updateProgress(idx);
+        }
+
+        function selectAnswer(isYes) {
+            currentSelection = isYes;
+            answers[currentQ] = isYes;
+
+            const btnYes = document.getElementById('btn-yes');
+            const btnNo  = document.getElementById('btn-no');
+            btnYes.className = 'yn-btn' + (isYes  ? ' selected-yes' : '');
+            btnNo.className  = 'yn-btn' + (!isYes ? ' selected-no'  : '');
+
+            document.getElementById('btn-next-q').disabled = false;
+        }
+
+        function nextQuestion() {
+            if (currentSelection === null) return;
+            answers[currentQ] = currentSelection;
+            currentQ++;
+            currentSelection = answers[currentQ] ?? null;
+            renderQuestion(currentQ);
+        }
+
+        function updateProgress(idx) {
+            const answered = answers.filter(a => a !== null).length;
+            const pct = Math.round((answered / 50) * 100);
+            document.getElementById('prog-label').textContent = `${answered} of 50 complete`;
+            document.getElementById('prog-pct').textContent   = `${pct}%`;
+            document.getElementById('prog-fill').style.width  = `${pct}%`;
+        }
+
+        // ─── SCORING ─────────────────────────────────────────────────────────
+        function roundToNearest5(val) {
+            return Math.round(val / 5) * 5;
+        }
+
+        function computeScores() {
+            const raw = {};
+            const rounded = {};
+            for (const [pillar, indices] of Object.entries(pillarMap)) {
+                const yesCount = indices.filter(i => answers[i] === true).length;
+                raw[pillar] = yesCount;
+                const pct = (yesCount / pillarTotals[pillar]) * 100;
+                rounded[pillar] = roundToNearest5(pct);
+            }
+            const totalYes = answers.filter(a => a === true).length;
+            return { raw, rounded, totalYes };
+        }
+
+        function getMaturityLevel(totalYes) {
+            if (totalYes <= 24) return 1;
+            if (totalYes <= 39) return 2;
+            return 3;
+        }
+
+        // ─── SUBMIT ──────────────────────────────────────────────────────────
+        function submitForm() {
+            if (currentSelection === null) return;
+            answers[49] = currentSelection;
+
+            showScreen('screen-submitting');
+
+            const { raw, rounded, totalYes } = computeScores();
+            const level = getMaturityLevel(totalYes);
+
+            const payload = {
+                companyName:   document.getElementById('companyName').value.trim(),
+                fleetSize:     document.getElementById('fleetSize').value.trim(),
+                contactEmail:  document.getElementById('contactEmail').value.trim(),
+                totalScore:    totalYes,
+                maturityLevel: `Level ${level}`,
+                sop:  rounded.SOP,
+                prat: rounded.PRAT,
+                pm:   rounded.PM,
+                rca:  rounded.RCA,
+                hmi:  rounded.HMI,
+                answers: answers.map(a => a === true ? 'Y' : a === false ? 'N' : '-')
+            };
+
+            // Submit to Google Sheets (fire and forget — show results regardless)
+            fetch(APPS_SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            }).catch(() => {});
+
+            // Small delay for UX, then show results
+            setTimeout(() => {
+                showResults(rounded, totalYes, level);
+            }, 1400);
+        }
+
+        // ─── RESULTS ─────────────────────────────────────────────────────────
+        function showResults(rounded, totalYes, level) {
+            // Score summary tiles
+            const pillarLabels = { SOP: 'SOP', PRAT: 'Pre-Flight', PM: 'Preventive\nMaint.', RCA: 'Root Cause', HMI: 'Pilot\nCurrency' };
+            const summaryEl = document.getElementById('score-summary');
+            summaryEl.innerHTML = Object.entries(rounded).map(([p, v]) => `
+                <div class="score-tile">
+                    <div class="score-tile-val">${v}</div>
+                    <div class="score-tile-label">${pillarLabels[p]}</div>
+                </div>
+            `).join('');
+
+            // Maturity panel
+            const profile = maturityProfiles[level];
+            const riskLabel = level === 3 ? 'Business Opportunity' : 'Risk Profile';
+            document.getElementById('maturity-panel').innerHTML = `
+                <div class="maturity-level-badge">${profile.badge} — ${totalYes}/50</div>
+                <div class="maturity-title">${profile.title.replace('\n', '<br>')}</div>
+                <div class="maturity-section">
+                    <div class="maturity-section-label">Status</div>
+                    <div class="maturity-text">${profile.status}</div>
+                </div>
+                <div class="maturity-section">
+                    <div class="maturity-section-label">${riskLabel}</div>
+                    <div class="maturity-text">${profile.risk}</div>
+                </div>
+                <div class="maturity-section">
+                    <div class="maturity-section-label">Strategic Gap</div>
+                    <div class="maturity-text">${profile.gap}</div>
+                </div>
+                <div class="maturity-section">
+                    <div class="maturity-section-label">Recommended Action</div>
+                    <div class="maturity-text"><strong>${profile.action}</strong></div>
+                </div>
+            `;
+
+            showScreen('screen-results');
+
+            // Radar chart
+            const radarLabels = [
+                ["Preventive", "Maintenance"],
+                ["Pilot", "Currency"],
+                ["Preflight Risk", "Assessment"],
+                ["Root Cause", "Analysis"],
+                ["Standard Ops", "Procedures"]
+            ];
+
+            new Chart(document.getElementById('resultsRadar'), {
+                type: 'radar',
+                data: {
+                    labels: radarLabels,
+                    datasets: [
+                        {
+                            label: 'Crewed Aviation Standard',
+                            data: [100, 100, 100, 100, 100],
+                            backgroundColor: 'rgba(217, 217, 217, 0.06)',
+                            borderColor: '#D9D9D9',
+                            pointBackgroundColor: '#D9D9D9',
+                            borderWidth: 1.5,
+                            borderDash: [4, 4]
+                        },
+                        {
+                            label: 'Your Program Profile',
+                            data: [
+                                rounded.PM,
+                                rounded.HMI,
+                                rounded.PRAT,
+                                rounded.RCA,
+                                rounded.SOP
+                            ],
+                            backgroundColor: 'rgba(176, 204, 51, 0.25)',
+                            borderColor: '#B0CC33',
+                            pointBackgroundColor: '#B0CC33',
+                            borderWidth: 2,
+                            fill: true
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                font: { family: 'Barlow', size: 10 },
+                                usePointStyle: true,
+                                color: '#D9D9D9',
+                                padding: 12
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(0,0,0,0.95)',
+                            titleColor: '#B0CC33',
+                            bodyColor: '#D9D9D9',
+                            padding: 10
+                        }
+                    },
+                    scales: {
+                        r: {
+                            min: 0,
+                            max: 100,
+                            angleLines: { color: 'rgba(176, 204, 51, 0.1)' },
+                            grid: { color: 'rgba(176, 204, 51, 0.1)' },
+                            pointLabels: {
+                                font: { family: 'Barlow', size: 9, weight: '500' },
+                                color: '#D9D9D9'
+                            },
+                            ticks: { display: false, stepSize: 20 }
+                        }
+                    }
+                }
+            });
+        }
+
+        // ─── GOOGLE APPS SCRIPT HEADER INIT ─────────────────────────────────
+        // On first load, ping the script to ensure headers are set.
+        // The script handles this server-side via doPost checking row 1.
+    </script>
+</body>
+</html>
