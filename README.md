@@ -358,7 +358,7 @@
                 <span class="section-label">Phased Integration</span>
                 <h2 class="text-2xl font-bold mb-3" style="color: var(--white);">The Program  Framework</h2>
                 <p class="leading-relaxed max-w-3xl mx-auto" style="color: var(--titanium);">
-                    To mitigate these compounding risks and close the aviation safety gap, we deploy a structured, four phase engagement. This transforms a drone program from a reactive tool into a proactive, aviation grade operation. Click each phase to reveal the underlying methodology.
+                    To mitigate these compounding risks and close the aviation safety gap, we deploy a structured, four phase engagement. This transforms a drone program from a reactive safety posture into a proactive, aviation grade operation. Click each phase to reveal the underlying methodology.
                 </p>
             </div>
 
